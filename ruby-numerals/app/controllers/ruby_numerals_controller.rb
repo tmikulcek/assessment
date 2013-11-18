@@ -2,7 +2,7 @@ class RubyNumeralsController < ApplicationController
   def index
     text = ""
     num_str = params[:number]
-    if num_str != nil #and num_str.should =~ /^[0-9]+$/
+    if num_str != nil and num_str =~ /^[0-9]+$/
       number = num_str.to_i
   #    if number.is_a? Integer
         @text = number_to_text(number, text)
@@ -14,8 +14,8 @@ class RubyNumeralsController < ApplicationController
   #    else
   #      @text = "Please enter a whole number"
   #    end
-    #else
-      #@text = "Please enter a number"
+    else
+      @text = "Please enter a number"
     end
   end
 
