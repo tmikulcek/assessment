@@ -3,12 +3,12 @@ class RubyNumeralsController < ApplicationController
     text = ""
     num_str = params[:number]
 
-    if num_str != nil and num_str =~ /^[0-9]+$/
+    if num_str != nil and num_str =~ /^-?[0-9]+$/
       number = num_str.to_i
       @text = number_to_text(number, text)
       words = @text.split(' ')
 
-      if words.count > 1
+      if words.count > 1 and words[-1] != "big"
         words[-1] = "and " + words[-1]
       end
 
@@ -21,6 +21,11 @@ class RubyNumeralsController < ApplicationController
   def number_to_text(number, text)
     if text == nil
       text = ""
+    end
+
+    if number < 0
+      text = "minus "
+      number = 0 - number
     end
 
     divisor = 1
