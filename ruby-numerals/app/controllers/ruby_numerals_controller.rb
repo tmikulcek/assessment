@@ -2,25 +2,20 @@ class RubyNumeralsController < ApplicationController
   def index
     text = ""
     num_str = params[:number]
+
     if num_str != nil and num_str =~ /^[0-9]+$/
       number = num_str.to_i
-  #    if number.is_a? Integer
-        @text = number_to_text(number, text)
-        words = @text.split(' ')
-        if words.count > 1
-          words[-1] = "and " + words[-1]
-        end
-        @text = words.join(' ')
-  #    else
-  #      @text = "Please enter a whole number"
-  #    end
+      @text = number_to_text(number, text)
+      words = @text.split(' ')
+
+      if words.count > 1
+        words[-1] = "and " + words[-1]
+      end
+
+      @text = words.join(' ')
     else
       @text = "Please enter a number"
     end
-  end
-
-  def is_number?(object)
-    true if Integer(object) rescue false
   end
 
   def number_to_text(number, text)
@@ -116,7 +111,6 @@ class RubyNumeralsController < ApplicationController
         text += "nineteen"
       end
     end
-
 
     if number >= 100  
       text = number_to_text(number/divisor, text) + suffix
