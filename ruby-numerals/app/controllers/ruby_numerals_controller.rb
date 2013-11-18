@@ -6,6 +6,11 @@ class RubyNumeralsController < ApplicationController
       number = num_str.to_i
   #    if number.is_a? Integer
         @text = number_to_text(number, text)
+        words = @text.split(' ')
+        if words.count > 1
+          words[-1] = "and " + words[-1]
+        end
+        @text = words.join(' ')
   #    else
   #      @text = "Please enter a whole number"
   #    end
